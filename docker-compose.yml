@@ -26,7 +26,14 @@ services:
     image: postgres
     ports:
       - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: root
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    logging:
-      driver: none
+      - ./databases:/var/lib/postgresql
+      
+  adminer:
+    build: ./adminer
+    image: adminer
+    restart: always
+    ports:
+      - 6080:8080
